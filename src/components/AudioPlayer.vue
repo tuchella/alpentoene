@@ -1,77 +1,91 @@
 <template>
-    <div id="audio-player-root" >
+  <div id="audio-player-root">
+    <!-- Hide the default audio player -->
+    <div>
+      <audio style="display: none" ref="player" :id="playerid">
+        <source :src="`${publicPath}${url}`" type="audio/wav" />
+      </audio>
+    </div>
 
-        <!-- Hide the default audio player -->
-        <div >
-            <audio
-                style="display:none"
-                ref="player"
-                :id="playerid"
-            >
-                <source :src="`${publicPath}${url}`" type="audio/wav" >
-            </audio>
-        </div>
-            
+    <div class="w-4/4 px-2 pt-2 mt-4" style="margin: auto">
+      <div>
+        <div class="space-y-2 flex-grow">
+          <div id="pogressbar"
+            class="bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden"
+          >
             <div
-                class="w-4/4 bg-gray-200 px-2 pt-2 mt-4 "
-                style="margin: auto;"
+              class="bg-blue-500 dark:bg-blue-400 w-1/2 h-1.5"
+              role="progressbar"
+              aria-valuenow="1456"
+              aria-valuemin="0"
+              aria-valuemax="4550"
+              :style="{ width: playProgress + '%' }" 
+            ></div>
+          </div>
+                      <input
+              v-model="playbackTime"
+              type="range"
+              min="0"
+              :max="audioDuration"
+              class="slider w-full h-full"
+              id="position"
+              name="position"
+            />
+
+          <div
+            class="text-gray-500 dark:text-gray-400 flex justify-between text-sm font-medium tabular-nums"
+          >
+             <div v-html="elapsedTime()"> 00:00 </div>
+              <div >
+                <div id="button-div" class="flex-initial pr-3">
+          <svg
+            @click="toggleAudio()"
+            v-show="!isPlaying"
+            class="play-button text-gray-400"
+            :class="{
+              'text-orange-600': audioLoaded,
+              'hover:text-orange-400': audioLoaded,
+              'cursor-pointer': audioLoaded,
+            }"
+            xmlns="http://www.w3.org/2000/svg"
+            
+            width="50" height="50" fill="none">
+      <circle class="text-gray-300 dark:text-gray-500" cx="25" cy="25" r="24" stroke="currentColor" stroke-width="1.5" />
+      <path d="M 19,16 19,34 33,24 z" fill="currentColor" />
+    </svg>
+          <svg
+            @click="toggleAudio()"
+            v-show="isPlaying"
+            class="play-button text-orange-400 hover:text-orange-400 cursor-pointer"
+            xmlns="http://www.w3.org/2000/svg"
+            width="50" height="50" fill="none">
+      <circle class="text-gray-300 dark:text-gray-500" cx="25" cy="25" r="24" stroke="currentColor" stroke-width="1.5" />
+      <path d="M18 16h4v18h-4V16zM28 16h4v18h-4z" fill="currentColor" />
+    </svg>
+        </div>
+
+              </div>
+                                <div v-html="totalTime()"> 00:00 </div>
+          </div>
+        </div>
+      </div>
+      <div id="player-row" class="inline-flex flex-wrap w-full max-w-5xl">
+        
+      </div>
+      <div style="display:none">
+        <div id="progress-bar" class="flex-grow">
+          <div class="overlay-container relative w-full h-full">
+
+            <!-- Show loading indicator until audio has been loaded -->
+
+            <div
+              v-show="!audioLoaded"
+              class="w-full absolute top-0 bottom-0 right-0 left-0 px-2 pointer-events-none"
+              style="color: #94bcec"
             >
-                <div id="player-row" class="inline-flex flex-wrap w-full max-w-5xl">
-                    <div id="button-div" class="flex-initial pr-3">
-                        <svg
-                            @click="toggleAudio()"
-                            v-show="!isPlaying"
-                            class="play-button text-gray-400"
-                            :class="{ 'text-orange-600': audioLoaded, 'hover:text-orange-400': audioLoaded, 'cursor-pointer': audioLoaded }"
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
-                        <svg
-                            @click="toggleAudio()"
-                            v-show="isPlaying"
-                            class="play-button text-orange-400 hover:text-orange-400 cursor-pointer"                            
-                            xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 20 20"
-                            fill="currentColor"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM7 8a1 1 0 012 0v4a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v4a1 1 0 102 0V8a1 1 0 00-1-1z"
-                                clip-rule="evenodd"
-                            />
-                        </svg>
-                    </div>
-
-                    <div
-                        id="progress-bar"
-                        class="flex-grow"
-                    >
-                        <div class="overlay-container relative w-full h-full">
-                            <input
-                                v-model="playbackTime"
-                                type="range"
-                                min="0"
-                                :max="audioDuration"
-                                class="slider w-full h-full"
-                                id="position"
-                                name="position"
-                            />
-
-                            <!-- Show loading indicator until audio has been loaded -->
-
-                            <div v-show="!audioLoaded"
-                            class="w-full absolute top-0 bottom-0 right-0 left-0 px-2 pointer-events-none"
-                            style="color: #94bcec">
-                            Loading please wait...
-                            </div>
-                            <!--
+              Loading please wait...
+            </div>
+            <!--
                             <div
                                 v-show="audioLoaded"
                                 class="flex w-full justify-between absolute top-0 bottom-0 right-0 left-0 px-2 pointer-events-none items-center"
@@ -83,13 +97,13 @@
                                 
                             </div>
                             -->
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            
-            <!-- outer gray border -->
+          </div>
         </div>
+      </div>
+    </div>
+
+    <!-- outer gray border -->
+  </div>
 </template>
 
 <script>
@@ -110,6 +124,11 @@ export default {
       isPlaying: false,
       publicPath: process.env.BASE_URL,
     };
+  },
+  computed: {
+    playProgress: function() {
+      return (this.playbackTime / this.audioDuration) * 100;
+    }
   },
   methods: {
     //Set the range slider max value equal to audio duration
@@ -229,10 +248,10 @@ export default {
           this.$refs.player.currentTime = this.playbackTime;
         }
       });
-    }
+    },
   },
   watch: {
-    url: function(newV, oldV) {
+    url: function (newV, oldV) {
       console.log(newV, oldV);
       const audio = this.$refs.player;
       this.pauseListener();
@@ -253,74 +272,14 @@ export default {
 </script>
 
 <style>
-/* Play/Pause Button */
-.play-button {
-  height: 45px;
-}
-input[type="range"] {
-  margin: auto;
-  -webkit-appearance: none;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
+input#position {
+  opacity: 0;
+  margin-top: -10px;
+  height: 10px;
+  display: block;
   cursor: pointer;
-  outline: none;
-  border-radius: 0; /* iOS */
-  background: transparent;
 }
-input[type="range"]:focus {
-  outline: none;
-}
-::-webkit-slider-runnable-track {
-  background: #fff;
-}
-/*
- * 1. Set to 0 width and remove border for a slider without a thumb
- */
-::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 0; /* 1 */
-  height: 40px;
-  background: #fff;
-  box-shadow: -100vw 0 0 100vw dodgerblue;
-  border: none; /* 2px solid #999; */
-}
-::-moz-range-track {
-  height: 40px;
-  background: #ddd;
-}
-::-moz-range-thumb {
-  background: #fff;
-  height: 40px;
-  width: 0; /* 20px; */
-  border: none; /* 3px solid #999; */
-  border-radius: 0 !important;
-  box-shadow: -100vw 0 0 100vw dodgerblue;
-  box-sizing: border-box;
-}
-::-ms-fill-lower {
-  background: dodgerblue;
-}
-::-ms-thumb {
-  background: #fff;
-  border: 2px solid #999;
-  height: 40px;
-  width: 20px;
-  box-sizing: border-box;
-}
-::-ms-ticks-after {
-  display: none;
-}
-::-ms-ticks-before {
-  display: none;
-}
-::-ms-track {
-  background: #ddd;
-  color: transparent;
-  height: 40px;
-  border: none;
-}
-::-ms-tooltip {
-  display: none;
+#pogressbar {
+  cursor: pointer;
 }
 </style>

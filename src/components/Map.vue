@@ -80,8 +80,10 @@ export default {
     toggleFilter() {
       if (this.isNight) {
         filterLayer.updateFilter(NIGHT_FILTER);
+        document.body.classList.add('dark');
       } else {
         filterLayer.updateFilter(DAY_FILTER);
+        document.body.classList.remove('dark');
       }
     },
     clicked(place) {

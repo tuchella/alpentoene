@@ -104,7 +104,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 26px;
   top: -3px;
   margin: 0 7px;
-  fill: black;
+  fill: #333;
 }
 
 #nightIcon {
@@ -113,7 +113,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 26px;
   top: -3px;
   margin: 0 7px;
-  fill: #000;
+  fill: #333;
 }
 
 .night #nightIcon, .night #dayIcon {
@@ -179,7 +179,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   padding: 2px;
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
-  border: 2px solid black;
+  border: 2px solid #333;
   border-radius: 2em;
 }
 
@@ -190,7 +190,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
 .toggle + .toggle-button:after {
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
-  background: black;
+  background: #333;
   content: "";
   border-radius: 1em;
 }
