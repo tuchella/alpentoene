@@ -22,7 +22,8 @@
       <div class="text-xl font-semibold text-gray-500" v-html="selectedPlace.time" />
     </div>
     <div class="pt-6 space-y-4 desc">
-    <p class="mb-4">is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+    <p class="mb-4">Hier steht irgendwann mal eine Beschreibung zu dem Ort. Es war schön hier. Toll Klänge. Vielleicht auch was hier so statt findet. Jeglich Informationen, die man sich nur wünschen kann.</p>
+    <p class="mb-4">Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
     </div>
     <div class="bg-gray-200 dark:bg-gray-700 rounded-xl rounded-t-none">
@@ -59,14 +60,14 @@ export default {
           title: "Flüehlen Talstation",
           loc: latLng(46.893316738836354, 8.627577518254629),
           time: "15:00",
-          audio: "walking2.wav"
+          audio: "walking3.wav"
         },
         {
           id: 2,
           title: "Altdorf Tellstatue",
           loc: latLng(46.881912189415374, 8.644006763776304),
           time: "9:30",
-          audio: "walking3.wav"
+          audio: "walking2.wav"
         }
       ],
       selectedPlace: null,
