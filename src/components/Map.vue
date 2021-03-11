@@ -1,27 +1,26 @@
 
 <template>
   <div class="map">
-    <day-night-toggle v-model="isNight" />
+    
     <l-map
       ref="map"
       :zoom="zoom"
       :center="center"
       :maxZoom="20"
-      style="height: 100vh; width: 100%; position: fixed; inset: 0px; "
+      style="height: 100vh; width: 100%; position: fixed; inset: 0px; top:50px;"
     >
       <l-tile-layer :url="url" :attribution="attribution" />
-      <l-marker :lat-lng="place.loc" v-for="place in places" :key="place.id" @click="clicked(place)" />
+      <l-marker :lat-lng="place.loc" v-for="place in places" :key="place.id" @click="clicked(place)" :icon="icon" />
     </l-map>
   </div>
 </template>
 
 <script>
-import { latLng } from "leaflet";
+import { latLng, icon } from "leaflet";
 import * as L from "leaflet";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import "proj4leaflet";
 import "leaflet.tilelayer.colorfilter";
-import DayNightToggle from './DayNightToggle.vue';
 //import proj4 from "proj4";
 
 /*
@@ -55,9 +54,8 @@ export default {
     LMap,
     LTileLayer,
     LMarker,
-    DayNightToggle,
   },
-  props: [ "places" ],
+  props: [ "places", "isNight" ],
   data() {
     return {
       zoom: 14,
@@ -66,9 +64,12 @@ export default {
       //      url: ' https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/21781/{z}/{x}/{y}.jpeg',
       //      url: ' https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/2056/{z}/{x}/{y}.jpeg',
       url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-      attribution:
-        '&copy; <a href="https://www.geo.admin.ch/">geo.admin.ch</a>',
-      isNight: false
+      attribution: '&copy; <a href="https://www.geo.admin.ch/">geo.admin.ch</a>',
+      icon: icon({
+        iconUrl: "images/marker-icon.png",
+        iconSize: [25, 41],
+        iconAnchor: [13, 41]
+      }),
     };
   },
   watch: {

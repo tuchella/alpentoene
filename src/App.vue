@@ -1,7 +1,19 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <Map v-bind:places="places" @select-marker="selectMarker" />
+  <div id="app" class="font-sans">
+    <div class="header bg-white dark:bg-gray-900 shadow flex p-2" style="width:100%; position: fixed; left: 0; top: 0; z-index: 90;">
+        <div class="">
+        <h1 class="text-3xl font-semibold" style="color: #ee5b53; display: inline-block; "><span class="font-ma">a</span>lpentöne</h1>
+        <h2 class="text-2xl font-semibold" style="color: #999; display: inline-block; margin-left:0.2em;">am dritten tag</h2>
+        </div>
+        <div class="flox-grow flex-1">
+        </div>
+        <div class="">
+        </div>
+        <div class="text-right">
+            <day-night-toggle v-model="isNight" />
+        </div>
+    </div>
+    <Map v-bind:places="places" v-bind:isNight="isNight" @select-marker="selectMarker" />
   <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-xl card shadow-lg" v-if="selectedPlace != null"
     :class="{ collapsed: collapsed }">
     <div class="flex-auto p-6 pb-0">
@@ -22,22 +34,24 @@
       <div class="text-xl font-semibold text-gray-500" v-html="selectedPlace.time" />
     </div>
     <div class="pt-6 space-y-4 desc">
-    <p class="mb-4">Hier steht irgendwann mal eine Beschreibung zu dem Ort. Es war schön hier. Toll Klänge. Vielleicht auch was hier so statt findet. Jeglich Informationen, die man sich nur wünschen kann.</p>
+    <p class="mb-4">Hier steht irgendwann mal eine Beschreibung zu dem Ort. Es war schön hier. Vielleicht auch was hier so statt findet. Jeglich Informationen, die man sich nur wünschen kann.</p>
     <p class="mb-4">Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
     </div>
     </div>
     <div class="bg-gray-200 dark:bg-gray-700 rounded-xl rounded-t-none">
-      <audio-player :url="`audio/${selectedPlace.audio}`" />
+      <audio-player :url="selectedPlace.audio" />
     </div>
   </div>
   </div>
 </template>
 
 <script>
-import Map from './components/Map.vue'
 import { Icon } from 'leaflet';
-import AudioPlayer from './components/AudioPlayer.vue';
 import { latLng } from "leaflet";
+
+import AudioPlayer from './components/AudioPlayer.vue';
+import DayNightToggle from './components/DayNightToggle.vue';
+import Map from './components/Map.vue'
 
 delete Icon.Default.prototype._getIconUrl;
 Icon.Default.mergeOptions({
@@ -51,6 +65,7 @@ export default {
   components: {
     Map,
     AudioPlayer,
+    DayNightToggle,
   },
   data() {
     return {
@@ -72,6 +87,7 @@ export default {
       ],
       selectedPlace: null,
       collapsed: false,
+      isNight: false,
     }
   },
   methods: {
@@ -88,7 +104,13 @@ export default {
 <style>
 html, body  {
   height: 100%;
+  font-family: 'Montserrat', sans-serif;
 }
+
+.font-ma {
+    font-family: 'Montserrat Alternates', sans-serif;
+}
+
 
 
 
@@ -103,8 +125,8 @@ html, body  {
 }
 @media (min-width: 768px) { 
   .card {
-    top: 10px; 
-    left: 50px; 
+    top: 70px; 
+    left: 60px; 
     bottom: auto;
     width: 500px;
   }
@@ -127,7 +149,6 @@ html, body  {
 }
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;

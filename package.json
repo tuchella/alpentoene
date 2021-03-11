@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "BASE_URL=http://localhost:8080/ vue-cli-service serve",
+    "serve": "NODE_ENV=development vue-cli-service serve --host localhost",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
