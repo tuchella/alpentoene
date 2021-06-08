@@ -57,16 +57,24 @@ export default {
       places: [
         {
           id: 1,
-          title: "Flüehlen Talstation",
-          loc: latLng(46.893316738836354, 8.627577518254629),
-          time: "15:00",
-          audio: "walking3.wav"
+          title: "Flüehlen, Ufer",
+          loc: latLng(46.901563, 8.621641),
+          time: "11:50",
+          audio: "walking3.wav",
+          
         },
         {
           id: 2,
-          title: "Altdorf Tellstatue",
+          title: "Altdorf, Tellstatue",
           loc: latLng(46.881912189415374, 8.644006763776304),
-          time: "9:30",
+          time: "19:30",
+          audio: "walking2.wav"
+        },
+        {
+          id: 3,
+          title: "Haldi, Wald",
+          loc: latLng(46.863253, 8.672428),
+          time: "15:20",
           audio: "walking2.wav"
         }
       ],
