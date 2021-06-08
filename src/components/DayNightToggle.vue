@@ -33,7 +33,7 @@
       v-bind:checked="value"
       v-on:input="updateEvent($event.target); onToggle()" />
     <label class="toggle-button" for="cb1"></label>
-    <label for="cb1">
+    <label for="cb1" style="color:black" >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -45,7 +45,7 @@
         enable-background="new 0 0 100 100"
         xml:space="preserve"
       >
-        <path
+        <path 
           d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"
         />
       </svg>
@@ -87,11 +87,8 @@ Please feel free to use this toggle if you like. But I request that you give cre
 
 .button-con {
   cursor: default;
-  position: absolute;
-  top: 30px;
-  right: 10px;
-  margin-left: -76px;
-  margin-top: -18px;
+  margin-top: 4px;
+  min-width: 150px;
 }
 
 .button-con label {
@@ -104,7 +101,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 26px;
   top: -3px;
   margin: 0 7px;
-  fill: #333;
+  fill: #232f66;
 }
 
 #nightIcon {
@@ -113,7 +110,8 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 26px;
   top: -3px;
   margin: 0 7px;
-  fill: #333;
+  margin-bottom:1px;
+  fill: #232f66;
 }
 
 .night #nightIcon, .night #dayIcon {
@@ -148,7 +146,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 2em;
   position: relative;
   cursor: pointer;
-  border: 2px solid #333;
+  border: 0px solid #232f66;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -179,7 +177,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   padding: 2px;
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
-  border: 2px solid #333;
+  border: 1px solid #232f66;
   border-radius: 2em;
 }
 
@@ -190,7 +188,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
 .toggle + .toggle-button:after {
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
-  background: #333;
+  background: #232f66;
   content: "";
   border-radius: 1em;
 }

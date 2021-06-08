@@ -14,7 +14,7 @@
             class="bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden"
           >
             <div
-              class="bg-blue-500 dark:bg-blue-400 w-1/2 h-1.5"
+              class="w-1/2 h-1.5 player-progress"
               role="progressbar"
               aria-valuenow="1456"
               aria-valuemin="0"
@@ -122,7 +122,7 @@ export default {
       audioDuration: 100,
       audioLoaded: false,
       isPlaying: false,
-      publicPath: process.env.BASE_URL,
+      publicPath: 'https://files.larstuchel.ch/alpentoene/',
     };
   },
   computed: {
@@ -251,15 +251,36 @@ export default {
     },
   },
   watch: {
-    url: function (newV, oldV) {
-      console.log(newV, oldV);
-      const audio = this.$refs.player;
+    url: function (newV) {
+      const oldAudio = this.$refs.player;
+      const newAudio = new Audio(this.publicPath + newV);
+
       this.pauseListener();
-      this.$refs.player = new Audio(this.publicPath + newV);
-      audio.pause();
-      this.$refs.player.currentTime = audio.currentTime;
+      //oldAudio.pause();
+      newAudio.volume = 0.05;
+      newAudio.currentTime = oldAudio.currentTime;
+      this.$refs.player = newAudio;
       this.initAudio();
       this.toggleAudio();
+
+      const fadeOut = setInterval(function () {
+          if (oldAudio.volume > 0.05) {
+              oldAudio.volume -= 0.05;
+          } else {
+              oldAudio.volume = 0.0;
+              oldAudio.remove();
+              clearInterval(fadeOut);
+          }
+      }, 50);
+      const fadeIn = setInterval(function () {
+          if (newAudio.volume < 0.95) {
+              newAudio.volume += 0.05;
+          } else {
+              newAudio.volume = 1.0;
+              newAudio.remove();
+              clearInterval(fadeIn);
+          }
+      }, 50);
     },
   },
   mounted: function () {
@@ -282,4 +303,12 @@ input#position {
 #pogressbar {
   cursor: pointer;
 }
+
+.player-progress {
+  background-color: #232f66;
+}
+.dark .player-progress {
+  background-color: rgb(238, 91, 83);
+}
+
 </style>
