@@ -76,7 +76,7 @@ export default {
       places: [
         {
           id: 1,
-          title: "Flüehlen, Ufer",
+          title: "Flüelen, Ufer",
           loc: latLng(46.901563, 8.621641),
           time: "11:50",
           audio: "walking3.wav",
