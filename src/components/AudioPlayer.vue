@@ -122,7 +122,7 @@ export default {
       audioDuration: 100,
       audioLoaded: false,
       isPlaying: false,
-      publicPath: 'https://files.larstuchel.ch/alpentoene/',
+      publicPath: 'https://files.inspex.dev/alpentoene/',
     };
   },
   computed: {

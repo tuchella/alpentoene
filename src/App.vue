@@ -1,11 +1,13 @@
 <template>
   <div id="app" class="font-sans">
-    <div class="header bg-white dark:bg-gray-900 shadow flex p-2" style="width:100%; position: fixed; left: 0; top: 0; z-index: 90;">
+    <div class="header bg-white dark:bg-gray-900 shadow flex" style="">
         <div class="">
-        <h1 class="text-3xl font-semibold" style="color: #ee5b53; display: inline-block; "><span class="font-ma">a</span>lpentöne</h1>
-        <h2 class="text-2xl font-semibold" style="color: #999; display: inline-block; margin-left:0.2em;">am dritten tag</h2>
+          <a href="https://www.alpentoene.ch/">
+        <img style="height:100%; max-height: 50px;" src="images/atlogo.svg" />
+          </a>
         </div>
-        <div class="flox-grow flex-1">
+        <div class="flox-grow flex-1 text-left">
+        <span class="text-2xl font-semibold" style="color: #999; display: inline-block; margin-left:0.2em; margin-top: 0.4em;">am dritten tag</span> 
         </div>
         <div class="">
         </div>
@@ -16,8 +18,8 @@
     <Map v-bind:places="places" v-bind:isNight="isNight" @select-marker="selectMarker" />
   <div class="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-xl card shadow-lg" v-if="selectedPlace != null"
     :class="{ collapsed: collapsed }">
-    <div class="flex-auto p-6 pb-0">
-    <div class="flex flex-wrap">
+    <div class="flex-auto pb-0">
+    <div class="flex flex-wrap px-6 pt-4">
       <h1 class="flex-auto text-xl font-semibold">
       {{ selectedPlace.title }}
       </h1>
@@ -30,12 +32,14 @@
         <span class="hidden md:inline" v-html="selectedPlace.time" />
       </div>
     </div>
-    <div class="pt-0 desc md:hidden">
+    <div class="pt-0 desc md:hidden px-6">
       <div class="text-xl font-semibold text-gray-500" v-html="selectedPlace.time" />
     </div>
-    <div class="pt-6 space-y-4 desc">
-    <p class="mb-4">Hier steht irgendwann mal eine Beschreibung zu dem Ort. Es war schön hier. Vielleicht auch was hier so statt findet. Jeglich Informationen, die man sich nur wünschen kann.</p>
-    <p class="mb-4">Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</p>
+    <div class="py-4 max-height: 285px; overflow: hidden;">
+      <img style="width:100%" :src="selectedPlace.image" />
+    </div>
+    <div class="px-6 py-4 space-y-4 desc text-justify">
+    <p class="mb-4">{{ selectedPlace.description }}</p>
     </div>
     </div>
     <div class="bg-gray-200 dark:bg-gray-700 rounded-xl rounded-t-none">
@@ -76,21 +80,26 @@ export default {
           loc: latLng(46.901563, 8.621641),
           time: "11:50",
           audio: "walking3.wav",
-          
+          description: "Die Wellen schlagen gegen das Ufer. Metall klappert im Wind. Ein Schiff kommt an. Laute Gespräche über die Fahrt und das was danach geschieht.",
+          image: "images/fln.jpg"
         },
         {
           id: 2,
           title: "Altdorf, Tellstatue",
           loc: latLng(46.881912189415374, 8.644006763776304),
-          time: "19:30",
-          audio: "walking2.wav"
+          time: "17:30",
+          audio: "walking2.wav",
+          description: "Feierabend. Reges treiben und letzte Besorgungen. Die Terassen sind wieder geöffnet. Überdeckt vom Strassenlärm. Das Plätschern eines Brunnens gerade noch hörbar.",
+          image: "images/ts.jpg"
         },
         {
           id: 3,
           title: "Haldi, Wald",
           loc: latLng(46.863253, 8.672428),
           time: "15:20",
-          audio: "walking2.wav"
+          audio: "walking2.wav",
+          description: "Die Sonne scheint (nicht hörbar). Vogelgezwitscher und Blätter im Wind. Man hört Kinder in der Ferne spielen, wenn die Kettensäge mal pause macht.",
+          image: "images/haldi.jpg"
         }
       ],
       selectedPlace: null,
@@ -133,7 +142,7 @@ html, body  {
 }
 @media (min-width: 768px) { 
   .card {
-    top: 70px; 
+    top: 7rem; 
     left: 60px; 
     bottom: auto;
     width: 500px;
@@ -145,8 +154,11 @@ html, body  {
   max-height: 100vh;
   overflow: hidden;
 }
+
+
 .card.collapsed .desc {
   max-height: 0px;
+  padding: 0px;
 }
 
 .card .chevron svg {
@@ -155,6 +167,31 @@ html, body  {
 .card.card.collapsed .chevron svg {
   transform: rotate(180deg);
 }
+
+.card img {
+  max-height: 285px;
+  transition: max-height 0.1s linear;
+}
+
+.card.collapsed img {
+  max-height: 0px;
+  padding: 0px;
+}
+
+.header {
+  width:100%; 
+  position: fixed; 
+  left: 0; 
+  top: 0; 
+  z-index: 90; 
+  height: 6.6rem;
+  padding: 0 3rem;
+}
+
+.header > div {
+  display: flex;
+  align-items: center;
+} 
 
 #app {
   -webkit-font-smoothing: antialiased;

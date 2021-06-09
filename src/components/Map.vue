@@ -7,7 +7,7 @@
       :zoom="zoom"
       :center="center"
       :maxZoom="20"
-      style="height: 100vh; width: 100%; position: fixed; inset: 0px; top:50px;"
+      style="height: 100vh; width: 100%; position: fixed; inset: 0px; top:6.5rem;"
     >
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-marker :lat-lng="place.loc" v-for="place in places" :key="place.id" @click="clicked(place)" :icon="icon" />
