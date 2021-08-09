@@ -7,6 +7,7 @@
       :zoom="zoom"
       :center="center"
       :maxZoom="20"
+      :max-bounds="bounds"
       style="height: 100vh; width: 100%; position: fixed; inset: 0px; top:6.5rem;"
     >
       <l-tile-layer :url="url" :attribution="attribution" />
@@ -16,7 +17,7 @@
 </template>
 
 <script>
-import { latLng, icon } from "leaflet";
+import { latLng, icon, latLngBounds, popup } from "leaflet";
 import * as L from "leaflet";
 import { LMap, LTileLayer, LMarker } from "vue2-leaflet";
 import "proj4leaflet";
@@ -40,12 +41,23 @@ const swissCrs = new L.Proj.CRS(
 
 const NIGHT_FILTER = ["hue:180deg", "invert:100%", "grayscale:50%"];
 const DAY_FILTER = ["hue:0deg", "invert:0%", "grayscale:0%"];
+
+function calcBounds(center, width, height) {
+  return latLngBounds(
+    latLng(center.lat - height, center.lng - width),
+    latLng(center.lat + height, center.lng + width)
+  ) 
+}
+
+const BOUNDS = calcBounds(latLng(46.881912189415374, 8.644006763776304), 0.12, 0.05)
+
 const filterLayer = L.tileLayer.colorFilter(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
         {
           attribution:
             '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
           filter: DAY_FILTER,
+          maxBounds: BOUNDS,
         }
       );
 
@@ -70,6 +82,7 @@ export default {
         iconSize: [25, 41],
         iconAnchor: [13, 41]
       }),
+      bounds: BOUNDS,
     };
   },
   watch: {
@@ -94,7 +107,31 @@ export default {
   mounted() {
     this.$nextTick(() => {
       filterLayer.addTo(this.$refs.map.mapObject);
+      popup({ closeButton: false, className: "myClass", closeOnClick: false, closeOnEscapeKey: false, autoClose: false, minWidth:100 })
+        .setLatLng([46.88321683477566, 8.641199544270261])
+        .setContent("Sie sind hier")
+        .openOn(this.$refs.map.mapObject);
+      
     });
   },
 };
 </script>
+
+<style>
+.leaflet-popup.myClass .leaflet-popup-content-wrapper {
+  background-color: transparent; 
+  color: #232f66;
+  box-shadow: none;
+  font-size: 1.2em;
+  overflow: visible;
+}
+.dark .leaflet-popup.myClass .leaflet-popup-content-wrapper {
+  color: white;
+}
+.leaflet-popup.myClass .leaflet-popup-tip {
+  background: #232f66;
+}
+.dark .leaflet-popup.myClass .leaflet-popup-tip {
+  background: white;
+}
+</style>
