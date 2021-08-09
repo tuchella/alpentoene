@@ -79,7 +79,7 @@ export default {
           title: "Flüelen, Ufer",
           loc: latLng(46.901563, 8.621641),
           time: "11:50",
-          audio: "walking3.wav",
+          audio: "Shore.mp3",
           description: "Die Wellen schlagen gegen das Ufer. Metall klappert im Wind. Ein Schiff kommt an. Laute Gespräche über die Fahrt und das was danach geschieht.",
           image: "images/fln.jpg"
         },
@@ -88,7 +88,7 @@ export default {
           title: "Altdorf, Tellstatue",
           loc: latLng(46.881912189415374, 8.644006763776304),
           time: "17:30",
-          audio: "walking2.wav",
+          audio: "City.mp3",
           description: "Feierabend. Reges treiben und letzte Besorgungen. Die Terassen sind wieder geöffnet. Überdeckt vom Strassenlärm. Das Plätschern eines Brunnens gerade noch hörbar.",
           image: "images/ts.jpg"
         },
@@ -97,7 +97,7 @@ export default {
           title: "Haldi, Wald",
           loc: latLng(46.863253, 8.672428),
           time: "15:20",
-          audio: "walking2.wav",
+          audio: "Mountains.mp3",
           description: "Die Sonne scheint (nicht hörbar). Vogelgezwitscher und Blätter im Wind. Man hört Kinder in der Ferne spielen, wenn die Kettensäge mal pause macht.",
           image: "images/haldi.jpg"
         }

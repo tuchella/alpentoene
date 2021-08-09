@@ -2,8 +2,8 @@
   <div id="audio-player-root">
     <!-- Hide the default audio player -->
     <div>
-      <audio style="display: none" ref="player" :id="playerid">
-        <source :src="`${publicPath}${url}`" type="audio/wav" />
+      <audio style="display: none" ref="player" :id="playerid" loop="true">
+        <source :src="`${publicPath}${url}`" type="audio/mpeg" />
       </audio>
     </div>
 
