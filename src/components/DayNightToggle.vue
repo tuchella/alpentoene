@@ -89,6 +89,13 @@ Please feel free to use this toggle if you like. But I request that you give cre
   cursor: default;
   margin-top: 4px;
   min-width: 150px;
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .button-con {
+    display: block;
+  }
 }
 
 .button-con label {

@@ -1,6 +1,5 @@
 
 <template>
-  <div class="map">
     
     <l-map
       ref="map"
@@ -8,12 +7,11 @@
       :center="center"
       :maxZoom="20"
       :max-bounds="bounds"
-      style="height: 100vh; width: 100%; position: fixed; inset: 0px; top:6.5rem;"
+      style="height: 100%; width: 100%; "
     >
       <l-tile-layer :url="url" :attribution="attribution" />
       <l-marker :lat-lng="place.loc" v-for="place in places" :key="place.id" @click="clicked(place)" :icon="icon" />
     </l-map>
-  </div>
 </template>
 
 <script>
@@ -70,7 +68,7 @@ export default {
   props: [ "places", "isNight" ],
   data() {
     return {
-      zoom: 14,
+      zoom: 13,
       center: latLng(46.881912189415374, 8.644006763776304),
       //      crs: swissCrs,
       //      url: ' https://wmts.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/21781/{z}/{x}/{y}.jpeg',
