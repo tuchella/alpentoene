@@ -281,7 +281,7 @@ export default {
 }
 html {
   background-color: black;
-  font-family: "Montserrat", sans-serif;
+  font-family: "Montserrat", sans-serif !important;
 }
 body {
   background-image: url('../public/images/bg_uri2.jpg');
