@@ -80,11 +80,7 @@ export default {
 </script>
 
 <style>
-/* Created By Joseph Shenton @TeamiHackify 
-
-Please feel free to use this toggle if you like. But I request that you give credit to me thank you */
-
-
+/* Created By Joseph Shenton @TeamiHackify  */
 .button-con {
   cursor: default;
   margin-top: 4px;
@@ -108,7 +104,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 26px;
   top: -3px;
   margin: 0 7px;
-  fill: #232f66;
+  fill: #FFFFFE;
 }
 
 #nightIcon {
@@ -118,7 +114,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   top: -3px;
   margin: 0 7px;
   margin-bottom:1px;
-  fill: #232f66;
+  fill: #FFFFFE;
 }
 
 .night #nightIcon, .night #dayIcon {
@@ -153,7 +149,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   height: 2em;
   position: relative;
   cursor: pointer;
-  border: 0px solid #232f66;
+  border: 0px solid #FFFFFE;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -184,7 +180,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
   padding: 2px;
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
-  border: 1px solid #232f66;
+  border: 1px solid #FFFFFE;
   border-radius: 2em;
 }
 
@@ -195,7 +191,7 @@ Please feel free to use this toggle if you like. But I request that you give cre
 .toggle + .toggle-button:after {
   -webkit-transition: all .2s ease;
   transition: all .2s ease;
-  background: #232f66;
+  background: #FFFFFE;
   content: "";
   border-radius: 1em;
 }

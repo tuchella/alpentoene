@@ -1,6 +1,6 @@
 <template>
 <div class="root-tile">
-      <div style="position:fixed; top: 0; right: 0">
+      <div style="position:fixed; top: 10px; right: 0">
         <day-night-toggle v-model="isNight" />
       </div>
       <div class="content-tile">
@@ -9,6 +9,7 @@
             <div class="title-tile">
               <img src="images/atlogo.svg" >  
               <span>am dritten tag</span>
+              <span>{{ userAgent }}</span>
             </div>
             <div :class="'location' + (selectedPlace.id == 1 ? ' active' : '')" @click="clickPlace(1)">
               <div class="title" style="background-image: url('images/fln.jpg'); ">
@@ -250,6 +251,11 @@ export default {
       isNight: false,
     };
   },
+  computed: {
+    userAgent() {
+      return navigator.userAgent;
+    }
+  },
   methods: {
     selectMarker(p) {
       this.selectedPlace = p;
@@ -279,6 +285,7 @@ html {
 }
 body {
   background-image: url('../public/images/bg_uri2.jpg');
+  background-size: auto 100%;
   height: 100vh; 
   width: 100vw; 
   margin: 0; 
@@ -330,12 +337,13 @@ body {
 }
 
 .location .title {
-  max-height: 282px; 
+  max-height: 300px; 
   height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-grow: 1;
+  background-size: 120% auto;
 }
 .location .title span {
   color:white; 
@@ -347,6 +355,7 @@ body {
 .location .desc span {
   color: white;
   margin: 1em;
+  font-size: 0.9em;
 }
 
 .map-tile {
@@ -373,7 +382,7 @@ body {
 }
 
 .root-tile {
-  max-width: 1500px; 
+  max-width: 1300px; 
   flex-grow: 1; 
   display: flex; 
   align-items: stretch; 

@@ -128,6 +128,10 @@ export default {
   computed: {
     playProgress: function() {
       return (this.playbackTime / this.audioDuration) * 100;
+    },
+    isSafari() {
+      const is_safari = navigator.userAgent.toLowerCase().indexOf('safari/') > -1;
+      return is_safari;
     }
   },
   methods: {
@@ -263,24 +267,31 @@ export default {
       this.initAudio();
       this.toggleAudio();
 
-      const fadeOut = setInterval(function () {
-          if (oldAudio.volume > 0.05) {
+      if (this.isSafari) {
+        oldAudio.volume = 0.0;
+        oldAudio.pause();
+        oldAudio.remove();
+        newAudio.volume = 1.0;
+      } else {
+        const fadeOut = setInterval(function () {
+            if (oldAudio.volume > 0.05) {
               oldAudio.volume -= 0.05;
-          } else {
+            } else {
               oldAudio.volume = 0.0;
-              oldAudio.remove();
-              clearInterval(fadeOut);
-          }
-      }, 50);
-      const fadeIn = setInterval(function () {
+                oldAudio.remove();
+                clearInterval(fadeOut);
+            }
+        }, 50);
+        const fadeIn = setInterval(function () {
           if (newAudio.volume < 0.95) {
-              newAudio.volume += 0.05;
+            newAudio.volume += 0.05;
           } else {
-              newAudio.volume = 1.0;
+            newAudio.volume = 1.0;
               newAudio.remove();
               clearInterval(fadeIn);
           }
-      }, 50);
+        }, 50);
+      }
     },
   },
   mounted: function () {
