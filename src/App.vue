@@ -9,7 +9,6 @@
             <div class="title-tile">
               <img src="images/atlogo.svg" >  
               <span>am dritten tag</span>
-              <span>{{ userAgent }}</span>
             </div>
             <div :class="'location' + (selectedPlace.id == 1 ? ' active' : '')" @click="clickPlace(1)">
               <div class="title" style="background-image: url('images/fln.jpg'); ">
@@ -343,7 +342,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  background-size: 120% auto;
+  background-size: 130% auto;
+  background-position: 50% 0%;
 }
 .location .title span {
   color:white; 

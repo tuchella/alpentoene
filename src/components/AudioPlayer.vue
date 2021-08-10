@@ -7,14 +7,14 @@
       </audio>
     </div>
 
-    <div class="w-4/4 px-2 pt-2 mt-4" style="margin: auto">
+    <div class="w-4/4 px-2 pt-8 mt-4" style="margin: auto">
       <div>
         <div class="space-y-2 flex-grow">
           <div id="pogressbar"
             class="bg-gray-300 dark:bg-gray-800 rounded-full overflow-hidden"
           >
             <div
-              class="w-1/2 h-1.5 player-progress"
+              class="w-1/2 player-progress"
               role="progressbar"
               aria-valuenow="1456"
               aria-valuemin="0"
@@ -123,6 +123,7 @@ export default {
       audioLoaded: false,
       isPlaying: false,
       publicPath: 'https://files.inspex.dev/alpentoene/',
+      audioCache: {}
     };
   },
   computed: {
@@ -257,8 +258,14 @@ export default {
   watch: {
     url: function (newV) {
       const oldAudio = this.$refs.player;
-      const newAudio = new Audio(this.publicPath + newV);
-
+      const file = this.publicPath + newV;
+      let newAudio;
+      if (this.audioCache[file]) {
+        newAudio = this.audioCache[file];
+      } else {
+        newAudio = new Audio(file);
+        this.audioCache[file] = newAudio;
+      }
       this.pauseListener();
       //oldAudio.pause();
       newAudio.volume = 0.05;
@@ -270,7 +277,7 @@ export default {
       if (this.isSafari) {
         oldAudio.volume = 0.0;
         oldAudio.pause();
-        oldAudio.remove();
+        //oldAudio.remove();
         newAudio.volume = 1.0;
       } else {
         const fadeOut = setInterval(function () {
@@ -278,8 +285,9 @@ export default {
               oldAudio.volume -= 0.05;
             } else {
               oldAudio.volume = 0.0;
-                oldAudio.remove();
-                clearInterval(fadeOut);
+              oldAudio.pause();
+              //oldAudio.remove();
+              clearInterval(fadeOut);
             }
         }, 50);
         const fadeIn = setInterval(function () {
@@ -287,8 +295,8 @@ export default {
             newAudio.volume += 0.05;
           } else {
             newAudio.volume = 1.0;
-              newAudio.remove();
-              clearInterval(fadeIn);
+            //newAudio.remove();
+            clearInterval(fadeIn);
           }
         }, 50);
       }
@@ -313,10 +321,13 @@ input#position {
 }
 #pogressbar {
   cursor: pointer;
+  height: 20px;
+  border-radius: 0px !important;
 }
 
 .player-progress {
   background-color: #232f66;
+  height: 20px;
 }
 .dark .player-progress {
   background-color: rgb(238, 91, 83);
