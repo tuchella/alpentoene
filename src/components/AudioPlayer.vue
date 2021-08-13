@@ -264,6 +264,7 @@ export default {
         newAudio = this.audioCache[file];
       } else {
         newAudio = new Audio(file);
+        newAudio.loop = true;
         this.audioCache[file] = newAudio;
       }
       this.pauseListener();
