@@ -19,7 +19,7 @@
                   Die Wellen schlagen gegen das Ufer. Metall klappert im Wind. Ein Schiff kommt an. Laute Gespräche über die Fahrt und das was danach geschieht.
                 </span>
                 <span class="desc-time">
-                  11:00
+                  11:50
                 </span>
               </div>
             </div>
@@ -45,7 +45,7 @@
                 Feierabend. Reges treiben und letzte Besorgungen. Die Terassen sind wieder geöffnet. Überdeckt vom Strassenlärm. Das Plätschern eines Brunnens gerade noch hörbar.
               </span>
               <span class="desc-time">
-                11:00
+                17:30
               </span>
               </div>
             </div>
@@ -60,7 +60,7 @@
                 Die Sonne scheint (nicht hörbar). Vogelgezwitscher und Blätter im Wind. Man hört Kinder in der Ferne spielen, wenn die Kettensäge mal pause macht.
               </span>
               <span class="desc-time">
-                11:00
+                15:20
               </span> 
               </div>
             </div>
